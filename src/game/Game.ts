@@ -1,6 +1,8 @@
 import * as PIXI from "pixi.js";
 import { StateManager } from "./fsm/StateManager";
 import { ResourceManager } from "./resources/ResourceManager";
+import { World } from "./framework/World";
+import { Camera } from "./framework/Camera";
 
 /**
  * Main game app class
@@ -10,10 +12,16 @@ export class Game {
      * Viewport width
      */
     private readonly _width: number;
+    public get width(): number {
+        return this._width;
+    }
     /**
      * Viewport height
      */
     private readonly _height: number;
+    public get height(): number {
+        return this._height;
+    }
 
     /**
      * Callback for each tick
@@ -53,6 +61,25 @@ export class Game {
     }
 
     /**
+     * Game world
+     */
+    private readonly _world: World;
+    public get world(): World {
+        return this._world;
+    }
+
+    /**
+     * Main camera
+     */
+    private _camera: Camera;
+    public get camera(): Camera {
+        return this._camera;
+    }
+    public set camera(camera: Camera) {
+        this._camera = camera;
+    }
+
+    /**
      * Constructor
      * @param width - Viewport width 
      * @param height - Viewport height
@@ -75,6 +102,9 @@ export class Game {
         this._stateManager = new StateManager(this);
         this._resourceManager = new ResourceManager();
 
+        this._world = new World(this);
+        this._world.init();
+
         Game._instance = this;
     }
 
@@ -83,7 +113,9 @@ export class Game {
      */
     public run(): void {
         this._updateLoop = () => {
-            this._stateManager.update(this._app.ticker.elapsedMS / 1000.0);
+            const delta: number = this._app.ticker.elapsedMS / 1000.0;
+            this._camera.update(delta);
+            this._stateManager.update(delta);
         }
 
         this._app!.ticker.add(this._updateLoop);

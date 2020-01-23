@@ -1,8 +1,6 @@
 import * as PIXI from 'pixi.js';
-import * as path from 'path';
 
 import { ImageLayer } from './ImageLayer';
-import { TiledMapLoader } from './TiledMapLoader';
 import { TileLayer } from './TileLayer';
 import { Tileset } from './Tileset'
 
@@ -10,6 +8,8 @@ import { Tileset } from './Tileset'
  * Tiled map
  */
 export class TiledMap extends PIXI.Container {
+    private static TILESET_ROUTE: string = 'assets/tilesets/maps';
+
     public tilesets: Tileset[] = [];
     public layers: { [index: string]: TileLayer } = {};
     public background: PIXI.Graphics = new PIXI.Graphics();
@@ -32,7 +32,6 @@ export class TiledMap extends PIXI.Container {
      * @param resource - Preloaded resource to use
      */
     public load(resource: PIXI.LoaderResource): void {
-        const route = 'assets/tilesets/maps'
         const { data } = resource;
 
         this.background.beginFill(0xFFF000, 1);
@@ -45,7 +44,7 @@ export class TiledMap extends PIXI.Container {
         this.addChild(this.background);
 
         data.tileSets.forEach((tileset: any) => {
-            this.tilesets.push(new Tileset(route, tileset))
+            this.tilesets.push(new Tileset(TiledMap.TILESET_ROUTE, tileset))
         })
 
         data.layers.forEach((layerData: any) => {
@@ -58,7 +57,7 @@ export class TiledMap extends PIXI.Container {
                 }
 
                 case 'image': {
-                    const imageLayer: ImageLayer = new ImageLayer(layerData, route);
+                    const imageLayer: ImageLayer = new ImageLayer(layerData, TiledMap.TILESET_ROUTE);
                     this.layers[layerData.name] = imageLayer as TileLayer;
                     this.addChild(imageLayer);
                     break;

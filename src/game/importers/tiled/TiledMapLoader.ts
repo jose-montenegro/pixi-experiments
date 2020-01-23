@@ -9,6 +9,9 @@ import { Game } from '~game/Game';
  * PIXI loader for tiled maps
  */
 export class TiledMapLoader implements PIXI.ILoaderPlugin {
+
+    private static TILESET_ROUTE: string = 'assets/tilesets/maps';
+
     /**
      * The loader to use
      */
@@ -35,7 +38,7 @@ export class TiledMapLoader implements PIXI.ILoaderPlugin {
             parentResource: resource
         };
 
-        const resourcePath = new URL('assets/tilesets/maps/', this.loader.baseUrl || window.location.href).href;
+        const resourcePath = new URL(TiledMapLoader.TILESET_ROUTE, this.loader.baseUrl || window.location.href).href;
 
         tmx.parse(
             resource.xhr.responseText,

@@ -23,8 +23,9 @@ export class MapState extends BaseState {
     public enter() {
         const map: TiledMap = ObjectFactory.createMapFrom(Constants.MAP_CASTLE)
         map.scale.set(0.1);
-        console.log(map.layers);
-        this.game.app.stage.addChild(map);
+        console.log(map.localWidth);
+        this.game.world.setBounds(map.x, map.y, map.width, map.height);
+        this.game.world.addChild(map);
     }
 
     /**
@@ -38,6 +39,6 @@ export class MapState extends BaseState {
      * Update callback
      */
     public update() {
-
+        this.game.camera.modifyPosition(1, 0.1);
     }
 }
