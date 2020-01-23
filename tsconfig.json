@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */,
+        "strict": false,
+        "baseUrl": "./src",
+        "paths": {
+            "~*": ["./*"]
+        },
+        "types": ["./types/import-files"],
+        "lib": ["es2015", "es2017", "dom"],
+    },
+    "include": ["./src/index.ts", "./src/**/*.ts"]
+}
