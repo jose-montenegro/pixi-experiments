@@ -3,6 +3,7 @@ import { StateManager } from "./fsm/StateManager";
 import { ResourceManager } from "./resources/ResourceManager";
 import { World } from "./framework/World";
 import { Camera } from "./framework/Camera";
+import { KeyboardManager } from "./framework/input/KeyboardManager";
 
 /**
  * Main game app class
@@ -60,6 +61,11 @@ export class Game {
         return this._resourceManager;
     }
 
+    private readonly _keyboardManager: KeyboardManager;
+    public get keyboardManager(): KeyboardManager {
+        return this._keyboardManager;
+    }
+
     /**
      * Game world
      */
@@ -101,6 +107,9 @@ export class Game {
 
         this._stateManager = new StateManager(this);
         this._resourceManager = new ResourceManager();
+        this._keyboardManager = new KeyboardManager(this);
+
+        this._keyboardManager.init();
 
         this._world = new World(this);
         this._world.init();
