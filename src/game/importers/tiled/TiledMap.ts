@@ -3,6 +3,7 @@ import * as PIXI from 'pixi.js';
 import { ImageLayer } from './ImageLayer';
 import { TileLayer } from './TileLayer';
 import { Tileset } from './Tileset'
+import { ObjectLayer } from './ObjectLayer';
 
 /**
  * Tiled map
@@ -12,6 +13,7 @@ export class TiledMap extends PIXI.Container {
 
     public tilesets: Tileset[] = [];
     public layers: { [index: string]: TileLayer } = {};
+    public objectLayers: { [index: string]: ObjectLayer }= {};
     public background: PIXI.Graphics = new PIXI.Graphics();
     public tileWidth: number = 0;
     public tileHeight: number = 0;
@@ -55,7 +57,11 @@ export class TiledMap extends PIXI.Container {
                     this.addChild(tileLayer);
                     break;
                 }
-
+                case 'object': {
+                    const objLayer: ObjectLayer = new ObjectLayer(layerData, layerData.objects);
+                    this.objectLayers[layerData.name] = objLayer;
+                    break;
+                }
                 case 'image': {
                     const imageLayer: ImageLayer = new ImageLayer(layerData, TiledMap.TILESET_ROUTE);
                     this.layers[layerData.name] = imageLayer as TileLayer;
@@ -64,5 +70,6 @@ export class TiledMap extends PIXI.Container {
                 }
             }
         });
+        console.log(this.objectLayers["Objects"]);
     }
 }
