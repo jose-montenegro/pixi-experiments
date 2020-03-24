@@ -19,6 +19,7 @@
         "nvm": "0.0.4",
         "path": "^0.12.7",
         "pixi-console": "^3.0.1",
+        "pixi-sound": "^3.0.4",
         "pixi.js": "^5.2.0",
         "tmx-parser": "^1.5.0"
     },

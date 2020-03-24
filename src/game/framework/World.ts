@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
 
 import { Game } from '../Game';
-import { Camera } from './Camera';
+import { Camera } from './camera/Camera';
 
 /**
  * World where all objects in the game live

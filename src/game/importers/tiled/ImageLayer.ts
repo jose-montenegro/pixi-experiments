@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import { LayerDataSchema } from './schemas/LayerDataSchema';
-import { ObjectFactory } from '~game/framework/ObjectFactory';
+import { ObjectFactory } from '~game/framework/factories/ObjectFactory';
 
 /**
  * Image layer for tiled maps
@@ -13,7 +13,7 @@ export class ImageLayer extends PIXI.Container {
         this.alpha = layer.opacity;
 
         if (layer.image && layer.image.source) {
-            ObjectFactory.createSpriteFrom(`${route}/${layer.image.source}`, this);
+            this.addChild(ObjectFactory.createSpriteFrom(`${route}/${layer.image.source}`).sprite);
         }
     }
 }

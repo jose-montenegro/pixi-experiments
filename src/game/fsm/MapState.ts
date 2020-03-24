@@ -1,7 +1,7 @@
 import { BaseState } from "./BaseState"
 import { Game } from "../Game";
 import { Constants } from "../Constants";
-import { ObjectFactory } from "../framework/ObjectFactory";
+import { ObjectFactory } from "../framework/factories/ObjectFactory";
 import { TiledMap } from "~game/importers/tiled/TiledMap";
 import { KeyCode } from "../framework/input/KeyCode";
 

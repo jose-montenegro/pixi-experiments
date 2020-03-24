@@ -2,7 +2,7 @@ import * as PIXI from "pixi.js";
 import { StateManager } from "./fsm/StateManager";
 import { ResourceManager } from "./resources/ResourceManager";
 import { World } from "./framework/World";
-import { Camera } from "./framework/Camera";
+import { Camera } from "./framework/camera/Camera";
 import { KeyboardManager } from "./framework/input/KeyboardManager";
 
 /**

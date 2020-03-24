@@ -1,4 +1,4 @@
-import { Sprite } from "./Sprite";
+import { Sprite } from "../components/Sprite";
 import { TiledMap } from "~game/importers/tiled/TiledMap";
 import { Game } from "~game/Game";
 
@@ -13,7 +13,10 @@ export class ObjectFactory {
      * Create a new sprite
      * @param key - Key for the sprite texture
      */
-    public static createSpriteFrom(key: string, container: PIXI.Container = null): Sprite {
-        return new Sprite(key, container);
+    public static createSpriteFrom(key: string): Sprite {
+        const sprite: Sprite = new Sprite();
+        const texture: PIXI.Texture = Game.instance.resourceManager.getTexture(key);
+        sprite.setTexture(texture);
+        return sprite;
     }
 }
