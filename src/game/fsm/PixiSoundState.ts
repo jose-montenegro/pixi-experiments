@@ -4,20 +4,24 @@ import 'pixi-sound';
 
 export class PixiSoundState extends BaseState {
 
+    public bgm: PIXI.sound.Sound;
+    public voice1: PIXI.sound.Sound;
+    public voice2: PIXI.sound.Sound;
+
     public update(deltaTime: number): void {
 
     }
     
     public enter(): void {
-        const bgm: PIXI.sound.Sound = this.game.resourceManager.getSound('bgm');
-        const voice1: PIXI.sound.Sound = this.game.resourceManager.getSound('voice1');
-        const voice2: PIXI.sound.Sound = this.game.resourceManager.getSound('voice2');
+        this.bgm = this.game.resourceManager.getSound('bgm');
+        this.voice1 = this.game.resourceManager.getSound('voice1');
+        this.voice2 = this.game.resourceManager.getSound('voice2');
 
-        voice1.play({
+        this.voice1.play({
             complete: () => {
-                voice2.play({
+                this.voice2.play({
                     complete: () => {
-                        bgm.play({
+                        this.bgm.play({
                             complete: () => {
                                 this.game.stateManager.changeTo('empty');
                             }
@@ -29,10 +33,9 @@ export class PixiSoundState extends BaseState {
     }
 
     public exit(): void {
-        console.log(PIXI);
-        PIXI.sound.remove('bgm');
-        PIXI.sound.remove('voice1');
-        PIXI.sound.remove('voice2');
+        this.bgm.destroy();
+        this.voice1.destroy();
+        this.voice2.destroy();
     }
 
 }

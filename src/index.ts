@@ -3,6 +3,7 @@ import { Constants } from './game/Constants';
 import { MapState } from './game/fsm/MapState';
 import { PixiSoundState } from '~game/fsm/PixiSoundState';
 import { EmptyState } from '~game/fsm/EmptyState';
+import { HowlerSoundState } from '~game/fsm/HowlerSoundState';
 
 /**
  * Main entry point of the application
@@ -37,6 +38,7 @@ export class Main {
     private onAssetsLoaded(): void {
         this._game.stateManager.add(Constants.STATE_MAP, new MapState(this._game));
         this._game.stateManager.add('pixiSound', new PixiSoundState(this._game));
+        this._game.stateManager.add('howlerSound', new HowlerSoundState(this._game));
         this._game.stateManager.add('empty', new EmptyState(this._game));
         this._game.stateManager.changeTo('pixiSound');
         this._game.run();
