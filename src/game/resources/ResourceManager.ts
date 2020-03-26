@@ -1,4 +1,5 @@
 import * as PIXI from "pixi.js";
+import 'pixi-sound';
 import { TiledMapLoader } from "~game/importers/tiled/TiledMapLoader";
 
 /**
@@ -71,6 +72,14 @@ export class ResourceManager {
             this._cache[name] =  new PIXI.Texture(PIXI.Texture.from(name).baseTexture);
         }
         return this._cache[name] as PIXI.Texture;
+    }
+
+    /**
+     * Get a sound. Not tested for correctness
+     * @param key - The key of the loaded sound
+     */
+    public getSound(key: string): PIXI.sound.Sound {
+        return this._loader.resources[key].sound;
     }
 
     /**
